@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>解析XML文件</title>
+</head>
+<body>
+
+<h1>Niujiaqi made it!@@</h1>
+
+<p>
+<b>To:</b> <span id="to"></span><br />
+<b>From:</b> <span id="from"></span><br />
+<b>Message:</b> <span id="message"></span>
+
+
+<script type="text/javascript">
+	
+if (window.XMLHttpRequest)
+	{//code for IE7+,Firefox,Chrome,Opera,Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+else
+	{//code for IE6,IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+xmlhttp.open("GET","note.xml",false);
+//false就是等待有返回数据的时候再继续往下走，还没有得到数据的时候就会卡在那里，直到获取数据为止。
+//true就是不等待,直接返回，这就是所谓的异步获取数据！
+xmlhttp.send();
+xmlDoc=xmlhttp.responseXML;
+
+document.getElementById("to").innerHTML=
+xmlDoc.getElementsByTagName("to")[0].childNodes[0].nodeValue;
+
+document.getElementById("from").innerHTML=
+xmlDoc.getElementsByTagName("from")[0].childNodes[0].nodeValue;
+
+document.getElementById("message").innerHTML=
+xmlDoc.getElementsByTagName("body")[0].childNodes[0].nodeValue;
+
+</script>
+</body>
+</html>
